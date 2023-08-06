@@ -13,9 +13,9 @@ const routes = [
     },
 
     {
-        path: "/dashboard",
-        name: "Dashboard",
-        component: Dashboard,
+        path: "/sidebar",
+        name: "Sidebar",
+        component:Sidebar,
         children: [
             {
                 path: "/credentials",
@@ -27,13 +27,14 @@ const routes = [
                 name: "Department",
                 component: Departments,
             },
+            {
+                path: "/dashboard",
+                name: "Dashboard",
+                component: Dashboard,
+            },
         ],
     },
-    {
-        path: "/sidebar",
-        name: "Sidebar",
-        component: Sidebar,
-    },
+
 ];
 const router = createRouter({
     history: createWebHistory(),
