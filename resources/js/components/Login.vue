@@ -2,32 +2,36 @@
     <div
         class="flex flex-col items-center justify-center bg-gray-200 h-[100vh]"
     >
-        <a
-            class="flex items-center justify-center mb-0"
-            href="javascript:void(0);"
+        <a class="flex items-center justify-center w-full mb-0"
             ><img
                 src="https://lionnomb.sirv.com/Terra%20Images/Terra%20Icon%20Pack/TERRA%20PACK-28.svg"
-                width="55%"
-        /></a>
+                width="65%"
+                class="w-64"
+            />
+        </a>
+
+        <p class="text-red-500 text-xs italic" v-if="error">
+            invalid credentials
+        </p>
 
         <div class="w-full max-w-sm">
-            <!-- <p class="text-gray-700 text-md flex justify-center pb-5">
-            Password manage 
-            
-        </p> -->
-            <form class="bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4">
+            <form
+                class="bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4"
+                @submit.prevent="handleLogin"
+            >
                 <div class="mb-4">
                     <label
                         class="block text-gray-700 text-sm font-bold mb-2"
                         for="username"
                     >
-                        Username
+                        Email
                     </label>
                     <input
                         class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
                         id="username"
                         type="text"
                         placeholder="Username"
+                        v-model="formData.email"
                     />
                 </div>
                 <div class="mb-6">
@@ -42,18 +46,17 @@
                         id="password"
                         type="password"
                         placeholder="password"
+                        v-model="formData.password"
                     />
-                    <p class="text-red-500 text-xs italic">
-                        Please choose a password.
-                    </p>
                 </div>
                 <div class="flex items-center justify-between">
                     <button
                         class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
-                        type="button"
+                        type="submit"
                     >
                         Sign In
                     </button>
+                    <v-icon icon="mdi-home" />
                     <a
                         class="inline-block align-baseline font-bold text-sm text-blue-500 hover:text-blue-800"
                         href="#"
@@ -68,4 +71,37 @@
         </div>
     </div>
 </template>
-<script></script>
+<script>
+import { reactive, ref } from "vue";
+import { login } from "./api/services.js";
+
+import { useRouter } from "vue-router";
+export default {
+    name: "Login",
+
+    setup() {
+        const router = useRouter();
+        const formData = reactive({
+            email: "",
+            password: "",
+        });
+        const error = ref(false);
+        const handleLogin = async () => {
+            const res = await login(formData);
+
+            if (res.status === 200) {
+                router.push({ name: "Dashboard" });
+            }
+            if (res.status === 401) {
+                error.value = true;
+                
+            }
+        };
+
+        return {
+            formData,
+            handleLogin,
+        };
+    },
+};
+</script>
