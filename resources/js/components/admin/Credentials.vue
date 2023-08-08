@@ -1,5 +1,7 @@
 <template>
     <div class="px-5">
-        danny
+    <v-data-table>
+
+    </v-data-table>
     </div>
-</template>
+</template> 
