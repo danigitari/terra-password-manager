@@ -1,5 +1,5 @@
 <template>
-    <nav class="flex justify-between items-center">
+    <nav class="flex justify-between items-center px-10">
         <div>Dashboard</div>
         <div class="flex gap-x-8">
             <v-text-field

@@ -1,14 +1,14 @@
 <template>
-    <div class="h-screen bg-gray-100">
-        <div className="flex max-w-screen">
+    <div class="h-screen flex max-w-screen bg-gray-100">
+
             <aside
  
-                class="bg-[#303690] p-5 pt-8 sticky h-screen top-0 duration-300 w-72"
+                class="bg-[#303690] p-5 pt-8 sticky h-screen top-0 duration-300 w-1/4 "
             >
 
                 <div className="flex items-center justify-center ">
                     <img
-                        className="cursor-pointer duration-500 w- bg-white h-24"
+                        className="cursor-pointer duration-500 bg-white h-24"
                         src="https://lionnomb.sirv.com/Terra%20Images/Terra%20Icon%20Pack/TERRA%20PACK-28.svg"
                     />
                 </div>
@@ -29,14 +29,12 @@
                     </div>
                 </div>
             </aside>
-            <div class="w-full">
-                <div class="px-10 py-3 bg-gray-200"><Navbar /></div>
-
-                <div className="overflow-auto w-full bg-gray-100">
+            <div class="w-3/4 justify-self-end overflow-auto">
+             
+                    <div class=" py-3 bg-gray-200 w-full"><Navbar /></div>
                     <router-view />
                 </div>
-            </div>
-        </div>
+
     </div>
 </template>
 

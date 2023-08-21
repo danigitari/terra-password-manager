@@ -14,7 +14,7 @@
 
         <div class="flex justify-around">
             <div
-                className="row-span-1 lg:row-span-2  grid grid-row-4 shadow-md h-32 w-[220px] my-5 rounded-lg bg-white sm:m-3 lg:m-0 lg:my-1 "
+                className="row-span-1 lg:row-span-2  grid grid-row-4 shadow-md h-32 w-[210px] my-5 rounded-lg bg-white sm:m-3 lg:m-0 lg:my-1 "
             >
                 <div className="row-span-1">
                     <div
@@ -36,7 +36,7 @@
                 </div>
             </div>
             <div
-                className="row-span-1 lg:row-span-2  grid grid-row-4 shadow-md h-32 w-[220px] my-5 rounded-lg bg-white sm:m-3 lg:m-0 lg:my-1 "
+                className="row-span-1 lg:row-span-2  grid grid-row-4 shadow-md h-32 w-[210px] my-5 rounded-lg bg-white sm:m-3 lg:m-0 lg:my-1 "
             >
                 <div className="row-span-1">
                     <div
@@ -58,7 +58,7 @@
                 </div>
             </div>
             <div
-                className="row-span-1 lg:row-span-2  grid grid-row-4 shadow-md h-32 w-[220px] my-5 rounded-lg bg-white sm:m-3 lg:m-0 lg:my-1 "
+                className="row-span-1 lg:row-span-2  grid grid-row-4 shadow-md h-32 w-[210px] my-5 rounded-lg bg-white sm:m-3 lg:m-0 lg:my-1 "
             >
                 <div className="row-span-1">
                     <div
@@ -80,7 +80,7 @@
                 </div>
             </div>
             <div
-                className="row-span-1 lg:row-span-2  grid grid-row-4 shadow-md h-32 w-[220px] my-5 rounded-lg bg-white sm:m-3 lg:m-0 lg:my-1 "
+                className="row-span-1 lg:row-span-2  grid grid-row-4 shadow-md h-32 w-[210px] my-5 rounded-lg bg-white sm:m-3 lg:m-0 lg:my-1 "
             >
                 <div className="row-span-1">
                     <div
