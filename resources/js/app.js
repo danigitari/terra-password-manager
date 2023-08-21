@@ -9,6 +9,8 @@ import { createVuetify } from "vuetify";
 import * as components from "vuetify/components";
 import * as directives from "vuetify/directives";
 import { aliases, mdi } from 'vuetify/iconsets/mdi'
+import Vue3EasyDataTable from 'vue3-easy-data-table';
+import 'vue3-easy-data-table/dist/style.css';
 
 
 
@@ -24,4 +26,7 @@ const vuetify = createVuetify({
         },
       },    
 });
-createApp(app).use(router).use(vuetify).mount("#app");
+const App = createApp(app);
+App.component('EasyDataTable', Vue3EasyDataTable)
+App.use(router).use(vuetify).mount("#app");
+

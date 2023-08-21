@@ -62,7 +62,7 @@
             >
                 <div className="row-span-1">
                     <div
-                        className="flex justify-end p-2 text-green-500 text-xl "
+                        className="flex justify-end p-2 text-green-500 text-xl"
                     >
                         <v-icon icon="fas fa arrow-up" />
                         <p className="px-2 text-sm">+ 2 %</p>
@@ -70,7 +70,7 @@
                 </div>
                 <div className="row-span-1"></div>
                 <div className="row-span-1"></div>
-                <div className="row-span-1">
+                <div className="row-span -1">
                     <div className="flex flex-col justify-start p-2 ">
                         <span className="text-3xl mb-1">17 </span>
                         <span className="text-md text-gray-400">
