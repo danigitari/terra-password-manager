@@ -14,14 +14,14 @@
 
         <div class="flex justify-around">
             <div
-                className="row-span-1 lg:row-span-2  grid grid-row-4 shadow-md h-32 w-[220px] my-5 rounded-lg bg-white sm:m-3 lg:m-0 lg:my-1 "
+                className="row-span-1 lg:row-span-2  grid grid-row-4 shadow-md h-32 w-[200px] my-5 rounded-lg bg-white sm:m-3 lg:m-0 lg:my-1 "
             >
                 <div className="row-span-1">
                     <div
                         className="flex justify-end p-2 text-green-500 text-xl "
                     >
-                        <v-icon icon="fas fa arrow-up" />
-                        <p className="px-2 text-sm">+ 2 %</p>
+                        <!-- <v-icon icon="fas fa arrow-up" /> -->
+                        <!-- <p className="px-2 text-sm">+ 2 %</p> -->
                     </div>
                 </div>
                 <div className="row-span-1"></div>
@@ -36,14 +36,14 @@
                 </div>
             </div>
             <div
-                className="row-span-1 lg:row-span-2  grid grid-row-4 shadow-md h-32 w-[220px] my-5 rounded-lg bg-white sm:m-3 lg:m-0 lg:my-1 "
+                className="row-span-1 lg:row-span-2  grid grid-row-4 shadow-md h-32 w-[200px] my-5 rounded-lg bg-white sm:m-3 lg:m-0 lg:my-1 "
             >
                 <div className="row-span-1">
                     <div
                         className="flex justify-end p-2 text-green-500 text-xl "
                     >
-                        <v-icon icon="fas fa arrow-up" />
-                        <p className="px-2 text-sm">+ 2 %</p>
+                        <!-- <v-icon icon="fas fa arrow-up" /> -->
+                        <!-- <p className="px-2 text-sm">+ 2 %</p> -->
                     </div>
                 </div>
                 <div className="row-span-1"></div>
@@ -58,14 +58,14 @@
                 </div>
             </div>
             <div
-                className="row-span-1 lg:row-span-2  grid grid-row-4 shadow-md h-32 w-[220px] my-5 rounded-lg bg-white sm:m-3 lg:m-0 lg:my-1 "
+                className="row-span-1 lg:row-span-2  grid grid-row-4 shadow-md h-32 w-[200px] my-5 rounded-lg bg-white sm:m-3 lg:m-0 lg:my-1 "
             >
                 <div className="row-span-1">
                     <div
                         className="flex justify-end p-2 text-green-500 text-xl"
                     >
-                        <v-icon icon="fas fa arrow-up" />
-                        <p className="px-2 text-sm">+ 2 %</p>
+                        <!-- <v-icon icon="fas fa arrow-up" />
+                        <p className="px-2 text-sm">+ 2 %</p> -->
                     </div>
                 </div>
                 <div className="row-span-1"></div>
@@ -80,14 +80,14 @@
                 </div>
             </div>
             <div
-                className="row-span-1 lg:row-span-2  grid grid-row-4 shadow-md h-32 w-[220px] my-5 rounded-lg bg-white sm:m-3 lg:m-0 lg:my-1 "
+                className="row-span-1 lg:row-span-2  grid grid-row-4 shadow-md h-32 w-[200px] my-5 rounded-lg bg-white sm:m-3 lg:m-0 lg:my-1 "
             >
                 <div className="row-span-1">
                     <div
                         className="flex justify-end p-2 text-green-500 text-xl "
                     >
-                        <v-icon icon="fas fa arrow-up" />
-                        <p className="px-2 text-sm">+ 2 %</p>
+                        <!-- <v-icon icon="fas fa arrow-up" />
+                        <p className="px-2 text-sm">+ 2 %</p> -->
                     </div>
                 </div>
                 <div className="row-span-1"></div>
@@ -102,65 +102,5 @@
                 </div>
             </div>
         </div>
-        <div class=" rounded-md p-2 shadow-md bg-white m-2">
-            <EasyDataTable :headers="headers" :items="items" border-cell />
-        </div>
     </div>
 </template>
-<script>
-// import  { Header, Item } from "vue3-easy-data-table";
-export default {
-    setup() {
-        const headers = [
-            { text: "Name ", value: "name" },
-            { text: "Department ", value: "department" },
-            { text: "Email ", value: "email" },
-            { text: "Credentials Accessed", value: "number"},
-            {text: "Last logged in", value: "date"}
-        ];
-
-        const items = [
-            {
-                player: "D",
-                team: "GSW",
-                number: 30,
-                position: "G",
-                indicator: { height: "6-2", weight: 185 },
-                lastAttended: "Davidson",
-                country: "USA",
-            },
-            {
-                player: "Lebron James",
-                team: "LAL",
-                number: 6,
-                position: "F",
-                indicator: { height: "6-9", weight: 250 },
-                lastAttended: "St. Vincent-St. Mary HS (OH)",
-                country: "USA",
-            },
-            {
-                player: "Kevin Durant",
-                team: "BKN",
-                number: 7,
-                position: "F",
-                indicator: { height: "6-10", weight: 240 },
-                lastAttended: "Texas-Austin",
-                country: "USA",
-            },
-            {
-                player: "Giannis Antetokounmpo",
-                team: "MIL",
-                number: 34,
-                position: "F",
-                indicator: { height: "6-11", weight: 242 },
-                lastAttended: "Filathlitikos",
-                country: "Greece",
-            },
-        ];
-        return {
-            headers,
-            items,
-        };
-    },
-};
-</script>

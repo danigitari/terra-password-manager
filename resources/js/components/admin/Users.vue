@@ -1,11 +1,15 @@
 <template>
     <div class="flex justify-end m-5">
-        <button class="rounded-sm bg-[#303690] py-2 px-4 text-white rounded-md shadow-md "> Add New User</button>
+        <button
+            class="rounded-sm bg-[#303690] py-2 px-4 text-white text-sm rounded-md shadow-md"
+        >
+            <v-icon icon="mdi-plus"></v-icon> Add New User
+        </button>
     </div>
     <div class="m-5 bg-white shadow-lg rounded-md p-2">
-        <EasyDataTable :headers="headers" :items="items" />
+        <EasyDataTable :headers="headers" :items="items" border-cell />
+        
     </div>
-
 </template>
 
 <script>
@@ -13,19 +17,15 @@
 export default {
     setup() {
         const headers = [
-            { text: "PLAYER", value: "player" },
-            { text: "TEAM", value: "team" },
-            { text: "NUMBER", value: "number" },
-            { text: "POSITION", value: "position" },
-            { text: "HEIGHT", value: "indicator.height" },
-            { text: "WEIGHT (lbs)", value: "indicator.weight", sortable: true },
-            { text: "LAST ATTENDED", value: "lastAttended", width: 200 },
-            { text: "COUNTRY", value: "country" },
+            { text: "Name ", value: "name" },
+            { text: "Department ", value: "department" },
+            { text: "Email ", value: "email" },
+            { text: "Phone Number ", value: "number" },
         ];
 
         const items = [
             {
-                player: "Stephen Curry",
+                player: "D",
                 team: "GSW",
                 number: 30,
                 position: "G",

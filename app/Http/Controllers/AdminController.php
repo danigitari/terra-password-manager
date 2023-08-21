@@ -16,6 +16,7 @@ class AdminController extends Controller
             'name' => $request->name,
             'email' => $request->email,
             'password' => $request->password,
+            'phone_number' => $request->phone_number,
         ])->assignRole($request->department);
 
         return response()->json([
