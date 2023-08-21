@@ -102,6 +102,7 @@
                 </div>
             </div>
         </div>
+        <p class="text-gray-600 text-lg m-3"> Logs</p>
         <div class=" rounded-md p-2 shadow-md bg-white m-2">
             <EasyDataTable :headers="headers" :items="items" border-cell />
         </div>
@@ -115,7 +116,7 @@ export default {
             { text: "Name ", value: "name" },
             { text: "Department ", value: "department" },
             { text: "Email ", value: "email" },
-            { text: "Credentials Accessed", value: "number"},
+            { text: "Credentials Copied", value: "number"},
             {text: "Last logged in", value: "date"}
         ];
 

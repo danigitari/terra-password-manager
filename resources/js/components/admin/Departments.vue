@@ -12,7 +12,7 @@
                 </template>
                 <v-card>
                     <v-card-title>
-                        <span class="text-h6">Add New User</span>
+                        <span class="text-h6">Add New Department</span>
                     </v-card-title>
                     <hr />
                     <v-card-text>
