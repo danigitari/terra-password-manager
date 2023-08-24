@@ -1,6 +1,6 @@
 <template>
     <div class="mt-5">
-        <v-row class="flex justify-end p-5 mx-1 ">
+        <v-row class="flex justify-end p-5 mx-1">
             <v-dialog v-model="dialog" persistent width="720">
                 <template v-slot:activator="{ props }">
                     <button
@@ -29,7 +29,6 @@
                                             'Development',
                                             'Sales',
                                             'Finance',
-                                            
                                         ]"
                                         label="Department"
                                         required
@@ -50,22 +49,20 @@
                             </v-row>
                         </v-container>
                     </v-card-text>
-                    <v-card-actions class="m-5 ">
+                    <v-card-actions class="m-5">
                         <v-spacer></v-spacer>
-                  <button
-                        class="rounded-sm bg-red-600 py-2 px-4 text-white text-sm rounded-md shadow-md"
+                        <button
+                            class="rounded-sm bg-red-600 py-2 px-4 text-white text-sm rounded-md shadow-md"
                             @click="dialog = false"
                         >
                             Close
                         </button>
                         <button
-                        class="rounded-sm bg-[#303690] py-2 px-4 text-white text-sm rounded-md shadow-md ml-4"
+                            class="rounded-sm bg-[#303690] py-2 px-4 text-white text-sm rounded-md shadow-md ml-4"
                             @click="dialog = false"
                         >
-                         Save
+                            Save
                         </button>
-      
-    
                     </v-card-actions>
                 </v-card>
             </v-dialog>
@@ -78,6 +75,7 @@
 
 <script>
 import { ref } from "vue";
+import axios from "axios";
 export default {
     setup() {
         const headers = [
@@ -87,6 +85,32 @@ export default {
             { text: "Phone Number ", value: "number" },
         ];
 
+        function addNewUser() {
+            axios.get("/sanctum/csrf-cookie").then((response) => {
+                axios.post("/api/users", {
+                    name: "Sheila",
+                    department: "Marketing",
+                    email: "sheila@terra.co.ke",
+                    number: "0700123456",
+                });
+            });
+        }
+        function getUsers() {
+            axios
+                .get("http://127.0.0.1:8000/api/getUsers", {
+                    headers: {
+                        Accept: "application/json",
+                        "Content-Type": "application/json",
+                        "X-Requested-With": "XMLHttpRequest",
+
+                        "Authorization":
+                            "Bearer " + localStorage.getItem("token"),
+                    },
+                })
+                .then((response) => {
+                    console.log(response.data);
+                });
+        }
         const items = [
             {
                 player: "D",
@@ -130,6 +154,8 @@ export default {
             headers,
             items,
             dialog,
+            addNewUser,
+            getUsers,
         };
     },
 };

@@ -15,7 +15,8 @@ class AuthController extends Controller
             'password' => bcrypt($request->password),
         ]);
 
-        $token = $user->createToken('authToken')->accessToken;
+        $token = $user->createToken('authToken')->plainTextToken;
+        $user->assignRole('Marketing');
 
         return response()->json([
             'message' => 'Registration Successful',
@@ -37,7 +38,7 @@ class AuthController extends Controller
         
         } 
             
-        $token = $user->createToken('authToken')->accessToken;
+        $token = $user->createToken('authToken')->plainTextToken;
 
         return response()->json([
             'message' => 'Login Successful',

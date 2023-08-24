@@ -56,7 +56,7 @@
                     >
                         Sign In
                     </button>
-                
+
                     <a
                         class="inline-block align-baseline font-bold text-sm text-blue-500 hover:text-blue-800"
                         href="#"
@@ -90,11 +90,11 @@ export default {
             const res = await login(formData);
 
             if (res.status === 200) {
-                router.push({ name: "Dashboard" });
+                localStorage.setItem("token", res.data.token);
+                router.push("/dashboard");
             }
             if (res.status === 401) {
                 error.value = true;
-                
             }
         };
 

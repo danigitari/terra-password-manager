@@ -7,9 +7,11 @@ use App\Models\User;
 use App\Models\Credential;
 use Illuminate\Support\Facades\Hash;
 use Spatie\Permission\Models\Role;
+use Spatie\Permission\Traits\HasRoles;
 
 class AdminController extends Controller
 {
+    use HasRoles;
     public function createUsers(Request $request)
     {
         User::create([
@@ -41,9 +43,26 @@ class AdminController extends Controller
         Role::create([
             'name' => $request->department,
         ]);
-        
+
         return response()->json([
             'message' => 'Department Created Successfully',
+        ]);
+    }
+
+    public function getUsers()
+    {      $users = User::all();
+            return response()->json([
+                'users' => $users,
+            ]);
+
+    }
+
+
+    public function getCredentials()
+    {
+        $credentials = Credential::all();
+        return response()->json([
+            'credentials' => $credentials,
         ]);
     }
 }
