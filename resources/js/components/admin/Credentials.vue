@@ -18,17 +18,13 @@
                     <v-card-text>
                         <v-container>
                             <v-row>
-    
                                 <v-col cols="12" sm="6" md="6">
                                     <v-select
-                                        :items="[
-                                            'Development',
-                                            'Marketing',
-                                            'Finance',
-                                        ]"
+                                        :items="departments"
                                         label="Department"
                                         required
                                         v-model="department"
+                                        multiple
                                     ></v-select>
                                 </v-col>
                                 <v-col cols="12" sm="6" md="6">
@@ -81,13 +77,26 @@
 
 // import { Header, Item } from "vue3-easy-data-table";
 <script>
-import { ref , onMounted } from "vue";
+import { ref, onMounted } from "vue";
+import { getRoles } from "../api/services";
 export default {
     setup() {
+        onMounted(async () => {
+            let data = await getRoles();
+
+            departments.value = Object.values(
+                data.roles
+                    .map((item) => item.name)
+                    .filter((item) => item !== "admin")
+            );
+
+          
+        });
         const organization = ref("");
         const notes = ref("");
         const password = ref("");
         const department = ref("");
+        const departments = ref([]);
 
         const headers = [];
 
@@ -120,9 +129,7 @@ export default {
                     console.log(error);
                 });
         }
-        function getCreds(){
-
-        }
+        function getCreds() {}
         const dialog = ref(false);
         return {
             headers,
@@ -133,7 +140,8 @@ export default {
             notes,
             password,
             department,
-            getCreds
+            departments,
+            getCreds,
         };
     },
 };

@@ -34,7 +34,9 @@
                 <div className="row-span-1"></div>
                 <div className="row-span-1">
                     <div className="flex flex-col justify-start p-2 ">
-                        <span className="text-3xl mb-1">7 </span>
+                        <span className="text-3xl mb-1">
+                            {{ users.userCount }}
+                        </span>
                         <span className="text-md text-gray-400">
                             Total users
                         </span>
@@ -48,7 +50,9 @@
                 <div className="row-span-1"></div>
                 <div className="row-span -1">
                     <div className="flex flex-col justify-start p-2 ">
-                        <span className="text-3xl mb-1">17 </span>
+                        <span className="text-3xl mb-1">
+                            {{ credentials.credentialCount }}
+                        </span>
                         <span className="text-md text-gray-400">
                             Saved Credentials
                         </span>
@@ -62,7 +66,9 @@
                 <div className="row-span-1"></div>
                 <div className="row-span-1">
                     <div className="flex flex-col justify-start p-2 ">
-                        <span className="text-3xl mb-1">7 </span>
+                        <span className="text-3xl mb-1">
+                            {{ roles.roleCount }}
+                        </span>
                         <span className="text-md text-gray-400">
                             Departments
                         </span>
@@ -72,37 +78,49 @@
         </div>
         <p class="text-gray-600 text-lg m-3">Logs</p>
         <div class="rounded-md p-2 shadow-md bg-white m-2">
-            <EasyDataTable :headers="headers" :items="items" border-cell />
+            <EasyDataTable :headers="headers" :items="items" border-cell>
+                <template #item-operation="item">
+                    <div class="operation-wrapper">
+                        <button
+                            class="rounded-sm bg-red-600 py-2 px-4 text-white text-sm rounded-md shadow-md"
+                            @click="deleteItem(item.id)"
+                        >
+                            Delete
+                        </button>
+                    </div></template
+                >
+            </EasyDataTable>
         </div>
     </div>
 </template>
 <script>
- import { onMounted , ref } from "vue";
- import { getUsers , getCredentials , getRoles } from '../api/services.js'
+import { onMounted, ref } from "vue";
+import { getUsers, getCredentials, getRoles } from "../api/services.js";
 export default {
     setup() {
-
-        const users = ref([])
-        const credentials = ref([])
-        const roles = ref([])
-        const items = ref([])
+        const users = ref([]);
+        const credentials = ref([]);
+        const roles = ref([]);
+        const items = ref([]);
         onMounted(async () => {
             users.value = await getUsers();
             credentials.value = await getCredentials();
             roles.value = await getRoles();
 
-            console.log(users.value)
-           
-        })
+            console.log(users.value);
+        });
         const headers = [
             { text: "Name ", value: "name" },
             { text: "Department ", value: "department" },
             { text: "Email ", value: "email" },
-            { text: "Credentials Copied", value: "number" },
+            // { text: "Credentials Copied", value: "number" },
             { text: "Last logged in", value: "date" },
+            // {  text: "Operation", value: "operation", width: "100px", sortable: false}
         ];
+        function deleteItem(id) {
+            axios;
+        }
 
-     
         return {
             headers,
             items,
@@ -110,7 +128,7 @@ export default {
             credentials,
             roles,
             items,
-            
+            deleteItem,
         };
     },
 };

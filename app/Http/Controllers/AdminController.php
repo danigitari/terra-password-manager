@@ -9,6 +9,7 @@ use App\Models\Credential;
 use Illuminate\Support\Facades\Hash;
 use Spatie\Permission\Models\Role;
 use Spatie\Permission\Traits\HasRoles;
+use Carbon\Carbon;
 
 class AdminController extends Controller
 {
@@ -20,10 +21,33 @@ class AdminController extends Controller
             'email' => $request->email,
             'password' => $request->name,
             'phone_number' => $request->phone_number,
+         
         ])->assignRole($request->department);
 
         return response()->json([
             'message' => 'User Created Successfully',
+        ]);
+    }
+
+    public function editUser(Request $request)
+    {
+        $user = User::find($request->id);
+        $user->name = $request->name;
+        $user->phone_number = $request->phone_number;
+        $user->department = $request->department;
+        $user->save();
+
+        return response()->json([
+            'message' => 'User Updated Successfully',
+        ]);
+    }
+    public function deleteUser(Request $request)
+    {
+        $user = User::find($request->id);
+        $user->delete();
+
+        return response()->json([
+            'message' => 'User Deleted Successfully',
         ]);
     }
     public function addNewAdmin(Request $request)
@@ -47,10 +71,36 @@ class AdminController extends Controller
             'password' => Hash::make($request->credentials),
             'organization' => $request->organization,
             'notes' => $request->notes,
-        ])->assignRole($request->department);
+            'department' => $request->departments,
+        ]);
 
         return response()->json([
             'message' => 'Credential Created Successfully',
+        ]);
+    }
+
+    public function editCredential(Request $request)
+    {
+        $credential = Credential::find($request->id);
+        $credential->name = $request->name;
+        $credential->password = Hash::make($request->password);
+        $credential->organization = $request->organization;
+        $credential->notes = $request->notes;
+        $credential->department = $request->departments;
+        $credential->save();
+
+        return response()->json([
+            'message' => 'Credential Updated Successfully',
+        ]);
+    }
+
+    public function deleteCredential(Request $request)
+    {
+        $credential = Credential::find($request->id);
+        $credential->delete();
+
+        return response()->json([
+            'message' => 'Credential Deleted Successfully',
         ]);
     }
     public function createNewRole(Request $request)
@@ -91,7 +141,7 @@ class AdminController extends Controller
         $roles = Role::all();
         $roleCount = Role::count();
         return response()->json([
-            'roles' => $roles,
+            'roles' => $roles->toArray(),
             'roleCount' => $roleCount,
 
         ]);

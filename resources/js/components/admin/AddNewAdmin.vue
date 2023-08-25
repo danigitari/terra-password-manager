@@ -75,11 +75,12 @@ export default {
         const phoneNumber = ref("");
         const email = ref("");
         const headers = [
-            // { text: "Name ", value: "name" },
-            // { text: "Email ", value: "email" },
-            // { text: "Phone Number ", value: "number" },
-        ];
+            { text: "Name ", value: "name" },
+            { text: "Email ", value: "email" },
+            { text: "Phone Number ", value: "phone_number" },
+            { text: "Last Login ", value: "last_login" }
 
+        ];
         function addNewAdmin() {
             axios
                 .post(

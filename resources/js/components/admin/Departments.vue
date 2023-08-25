@@ -18,7 +18,7 @@
                     <v-card-text>
                         <v-container>
                             <v-row>
-                                <v-col cols="12">
+                                <v-col cols="12">   
                                     <v-text-field
                                         label=" Name of Department"
                                         v-model="department"
@@ -55,7 +55,14 @@
 import { ref } from "vue";
 export default {
     setup() {
-        const headers = [];
+        const headers = [
+
+            { text: "Department ", value: "department" },
+            { text: "Number of users ", value: "userCount" },
+            { text: "Created at ", value: "created_at" },
+            { text: "Edit", value: "edit-operation" },
+            { text: "Delete", value: "delete-operation" },
+        ];
         const department = ref('')
 
         const items = [];
@@ -86,6 +93,7 @@ export default {
                     console.log(error);
                 });
         }
+        
         return {
             headers,
             items,

@@ -68,7 +68,18 @@
         </div>
 
         <div class="rounded-md p-2 shadow-md bg-white m-2">
-            <EasyDataTable :headers="headers" :items="items" border-cell />
+            <EasyDataTable :headers="headers" :items="items" border-cell >
+            <template #item-operation="item">
+                <div class="operation-wrapper">
+                    <button
+                        class="rounded-sm bg-red-600 py-2 px-4 text-white text-sm rounded-md shadow-md"
+                        @click="deleteItem(item.id)"
+                    >
+                        Delete
+                    </button>
+                 </div
+            ></template>
+            </EasyDataTable>
         </div>
     </div>
 </template>

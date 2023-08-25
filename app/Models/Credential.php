@@ -16,4 +16,8 @@ class Credential extends Model
 
     ];
 
+    protected $casts = [
+        'department' => 'array',
+    ];
+
 }

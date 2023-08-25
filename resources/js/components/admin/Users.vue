@@ -74,7 +74,32 @@
     </div>
 
     <div class="m-5 bg-white shadow-lg rounded-md p-2">
-        <EasyDataTable :headers="headers" :items="items" border-cell />
+        <EasyDataTable :headers="headers" :items="items" border-cell>
+            <template #item-edit-operation="item">
+                <div class="flex items-center justify-center">
+                    <button
+                        class="rounded-full bg-blue-600 py-1 px-4 text-white text-sm shadow-md"
+                        @click="showEditModal(item.id)"
+                    >
+                        <v-icon
+                            icon="mdi-account-edit-outline"
+                            class="px-3"
+                        ></v-icon>
+                    </button>
+                </div>
+            </template>
+
+            <template #item-delete-operation="item">
+                <div class="operation-wrapper">
+                    <button
+                        class="rounded-full bg-red-600 py-1 px-4 text-white text-sm shadow-md"
+                        @click="showDeleteModal(item.id)"
+                    >
+                        <v-icon icon="mdi-delete-outline" class="px-3"></v-icon>
+                    </button>
+                </div>
+            </template>
+        </EasyDataTable>
     </div>
 </template>
 
@@ -83,10 +108,10 @@ import { ref, onMounted } from "vue";
 import axios from "axios";
 export default {
     setup() {
-        onMounted(()=> {
-            getUsers()
-        })
-        const users = ref([])
+        onMounted(() => {
+            getUsers();
+        });
+        const users = ref([]);
         const name = ref("");
         const department = ref("");
         const phoneNumber = ref("");
@@ -96,6 +121,8 @@ export default {
             { text: "Department ", value: "department" },
             { text: "Email ", value: "email" },
             { text: "Phone Number ", value: "phone_number" },
+            { text: "Edit", value: "edit-operation" },
+            { text: "Delete", value: "delete-operation" },
         ];
 
         function addNewUser() {
@@ -125,7 +152,7 @@ export default {
                 .catch((error) => {
                     console.log(error);
                 });
-                getUsers()
+            getUsers();
         }
 
         function getUsers() {
@@ -141,19 +168,17 @@ export default {
                     },
                 })
                 .then((response) => {
-                    users.value = response.data.users
-                    items.value= users.value
+                    users.value = response.data.users;
+                    items.value = users.value;
                     console.log(response.data);
                 });
-                
         }
-        const items = ref([])
+        const items = ref([]);
+        function showDeleteModal(id) {
+            
+        }
 
-        // const items = users.value.map(user => { 
-        //     return [
-        //         {}
-        //     ]
-        // })
+        function showEditModal(id) {}
         const dialog = ref(false);
         return {
             headers,
@@ -165,7 +190,9 @@ export default {
             department,
             phoneNumber,
             email,
-            users
+            users,
+            showDeleteModal,
+            showEditModal,
         };
     },
 };
