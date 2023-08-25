@@ -88,19 +88,32 @@ export default {
         const error = ref(false);
         const handleLogin = async () => {
             const res = await login(formData);
+            if(res.response){
+            if (res.response.status === 401) {
+                error.value = true;
+            }}
+            if (!res.data.role) {
+                error.value = true;
+                router.push("/");
+            }
 
             if (res.status === 200) {
-                localStorage.setItem("token", res.data.token);
-                router.push("/dashboard");
+                if (res.data.role === "admin") {
+                    localStorage.setItem("token", res.data.token);
+                    router.push("/dashboard");
+                }
+                else {
+                    localStorage.setItem("token", res.data.token);
+                    router.push("/user-dashboard");
+                }
             }
-            if (res.status === 401) {
-                error.value = true;
-            }
+
         };
 
         return {
             formData,
             handleLogin,
+            error
         };
     },
 };

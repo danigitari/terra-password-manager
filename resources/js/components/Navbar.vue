@@ -22,15 +22,54 @@
                     </v-avatar>
                 </template>
                 <v-list class="w-48">
-                    <v-list-item class="border-b-[1px] border-gray-900 text-sm ">  
-                        <v-list-item-title>  <v-icon icon="mdi-plus" class="px-3"></v-icon>  Logout </v-list-item-title>
+                    <v-list-item class="border-b-[1px] border-gray-900 text-sm">
+                        <v-list-item-title>
+                            <button @click="logout">
+                                <v-icon icon="mdi-plus" class="px-3"></v-icon>
+                                Logout
+                            </button>
+                        </v-list-item-title>
                     </v-list-item>
-                    <hr>
+                    <hr />
                     <v-list-item>
-                        <v-list-item-title>  <v-icon icon="mdi-account"></v-icon>  Profile</v-list-item-title>
+                        <v-list-item-title>
+                            <v-icon icon="mdi-account"></v-icon>
+                            Profile</v-list-item-title
+                        >
                     </v-list-item>
                 </v-list>
             </v-menu>
         </div>
     </nav>
 </template>
+<script>
+import router from './router';
+
+export default {
+    setup() {
+        const logout = () => {
+                axios
+                    .post("http://127.0.0.1:8000/api/logout", {
+                        headers: {
+                            Accept: "application/json",
+                            "Content-Type": "application/json",
+                            "X-Requested-With": "XMLHttpRequest",
+                            Authorization:
+                                "Bearer " + localStorage.getItem("token"),
+                        },
+                    })
+                    .then((response) => {
+                        console.log(response.data);
+                    })
+                    .catch((error) => {
+                        console.log(error);
+                    });
+            
+            localStorage.removeItem("token");
+            router.push({ name: "login" });
+        };
+
+        return { logout };
+    },
+};
+</script>

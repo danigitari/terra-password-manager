@@ -22,3 +22,14 @@ export async function login(loginCredentials) {
         return error;
     }
 }
+
+export async function getUsers() { 
+    try {
+        const res = await api.get('/getUsers');
+        return res.data;
+    }
+    catch(error) {
+        console.error(error);
+        return error;
+    }
+}

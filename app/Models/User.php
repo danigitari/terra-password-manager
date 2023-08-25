@@ -22,6 +22,9 @@ class User extends Authenticatable
         'name',
         'email',
         'password',
+        'phone_number',
+        'department'
+
     ];
 
     /**
@@ -43,4 +46,7 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
         'password' => 'hashed',
     ];
+    public function logs(){
+        return $this->hasOne( \App\Models\log::class);
+    }
 }

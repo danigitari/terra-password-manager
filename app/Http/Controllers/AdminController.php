@@ -17,7 +17,7 @@ class AdminController extends Controller
         User::create([
             'name' => $request->name,
             'email' => $request->email,
-            'password' => $request->password,
+            'password' => $request->name,
             'phone_number' => $request->phone_number,
         ])->assignRole($request->department);
 
@@ -25,12 +25,26 @@ class AdminController extends Controller
             'message' => 'User Created Successfully',
         ]);
     }
+    public function addNewAdmin(Request $request)
+    {
+        User::create([
+            'name' => $request->name,
+            'email' => $request->email,
+            'password' => $request->name,
+            'phone_number' => $request->phone_number,
+        ])->assignRole($request->admin);
+
+        return response()->json([
+            'message' => 'AdminCreated Successfully',
+        ]);
+    }
 
     public function createNewCredential(Request $request)
     {
         Credential::create([
             'name' => $request->name,
-            'credential' => Hash::make($request->credentials),
+            'password' => Hash::make($request->credentials),
+            'organization' => $request->organization,
             'notes' => $request->notes,
         ])->assignRole($request->department);
 

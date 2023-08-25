@@ -48,6 +48,8 @@ const Menus = ref([
     { title: "Users", src: "mdi-account", gap: true, route: "/users" },
     { title: "Credentials", src: "mdi-home", route: "/credentials" },
     { title: "Departments ", src: "mdi-account-group", route: "/departments" },
+    { title: "Add New Admin ", src: "mdi-account-group", route: "/addNewAdmin" },
+
 ]);
 </script>
 

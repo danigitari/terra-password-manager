@@ -22,17 +22,18 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 
 Route::post('/login', [\App\Http\Controllers\AuthController::class, 'login']);
 Route::post('/register', [\App\Http\Controllers\AuthController::class, 'register']);
-Route::post('/logout', [\App\Http\Controllers\AuthController::class, 'logout']);
 
-Route::group(['middleware' => ['role:admin']], function () {
-    Route::group(['middleware' => ['auth:sanctum']], function () {
+Route::group(['middleware' => ['auth:sanctum']], function () {
+    Route::group(['middleware' => ['role:admin']], function () {
+
         Route::post('/createUsers', [\App\Http\Controllers\AdminController::class, 'createUsers']);
         Route::post('/createNewCredential', [\App\Http\Controllers\AdminController::class, 'createNewCredential']);
         Route::post('/createNewRole', [\App\Http\Controllers\AdminController::class, 'createNewRole']);
         Route::get('/getUsers', [\App\Http\Controllers\AdminController::class, 'getUsers']);
+        Route::get('/addNewAdmin', [\App\Http\Controllers\AdminController::class, 'addNewAdmin']);
+        
     });
-    
-
+    Route::post('/logout', [\App\Http\Controllers\AuthController::class, 'logout']);
+    Route::post('/editProfile',[\App\Http\Controllers\AuthController::class, 'editProfile']);
+    Route::get('/getCurrentUser', [\App\Http\Controllers\AuthController::class, 'getCurrentUser']);
 });
-
-

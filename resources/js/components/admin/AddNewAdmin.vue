@@ -7,53 +7,36 @@
                         class="rounded-sm bg-[#303690] py-2 px-4 text-white text-sm rounded-md shadow-md"
                         v-bind="props"
                     >
-                        <v-icon icon="mdi-plus"></v-icon> Add New Credential
+                        <v-icon icon="mdi-plus"></v-icon> Add New Admin
                     </button>
                 </template>
                 <v-card>
                     <v-card-title>
-                        <span class="text-h6">Add New Credential</span>
+                        <span class="text-h6">Add New Admin</span>
                     </v-card-title>
                     <hr />
                     <v-card-text>
                         <v-container>
                             <v-row>
-                                <v-col cols="12" sm="6" md="6">
+                                <v-col cols="12">
                                     <v-text-field
                                         label="Full Name"
+                                        v-model="name"
                                     ></v-text-field>
                                 </v-col>
-                                <v-col cols="12" sm="6" md="6">
-                                    <v-select
-                                        :items="[
-                                            'Development',
-                                            'Marketing',
-                                            'Finance',
-                                        ]"
-                                        label="Department"
-                                        required
-                                        v-model="department"
-                                    ></v-select>
-                                </v-col>
+
                                 <v-col cols="12" sm="6" md="6">
                                     <v-text-field
-                                        label="Organization"
+                                        label="Phone Number*"
                                         required
-                                        v-model="organization"
+                                        v-model="phoneNumber"
                                     ></v-text-field>
                                 </v-col>
                                 <v-col cols="12" sm="6" md="6">
                                     <v-text-field
-                                        label="Password"
+                                        label="Email*"
                                         required
-                                        v-model="password"
-                                    ></v-text-field>
-                                </v-col>
-                                <v-col cols="12" rows="4">
-                                    <v-text-field
-                                        label="Notes"
-                                        required
-                                        v-model="notes"
+                                        v-model="email"
                                     ></v-text-field>
                                 </v-col>
                             </v-row>
@@ -69,7 +52,7 @@
                         </button>
                         <button
                             class="rounded-sm bg-[#303690] py-2 px-4 text-white text-sm rounded-md shadow-md ml-4"
-                            @click="dialog = false"
+                            @click="addNewAdmin"
                         >
                             Save
                         </button>
@@ -83,30 +66,28 @@
     </div>
 </template>
 
-// import { Header, Item } from "vue3-easy-data-table";
 <script>
 import { ref } from "vue";
+import axios from "axios";
 export default {
     setup() {
         const name = ref("");
-        const organization = ref("");
-        const notes = ref("");
-        const password = ref("");
-        const department = ref("");
+        const phoneNumber = ref("");
+        const email = ref("");
+        const headers = [
+            // { text: "Name ", value: "name" },
+            // { text: "Email ", value: "email" },
+            // { text: "Phone Number ", value: "number" },
+        ];
 
-        const headers = [];
-
-        const items = [];
-        function addNewCredential() {
+        function addNewAdmin() {
             axios
                 .post(
-                    "http://127.0.0.1:8000/api/createNewCredential",
+                    "http://127.0.0.1:8000/api/addNewAdmin",
                     {
                         name: name.value,
-                        organization: organization.value,
-                        password: password.value,
-                        notes: notes.value,
-                        department: department.value,
+                        email: email.value,
+                        number: phoneNumber.value,
                     },
                     {
                         headers: {
@@ -126,17 +107,34 @@ export default {
                     console.log(error);
                 });
         }
+
+        function getUsers() {
+            axios
+                .get("http://127.0.0.1:8000/api/getUsers", {
+                    headers: {
+                        Accept: "application/json",
+                        "Content-Type": "application/json",
+                        "X-Requested-With": "XMLHttpRequest",
+
+                        Authorization:
+                            "Bearer " + localStorage.getItem("token"),
+                    },
+                })
+                .then((response) => {
+                    console.log(response.data);
+                });
+        }
+        const items = [];
         const dialog = ref(false);
         return {
             headers,
             items,
             dialog,
-            addNewCredential,
+            addNewAdmin,
+            getUsers,
             name,
-            organization,
-            notes,
-            password,
-            department,
+            phoneNumber,
+            email,
         };
     },
 };

@@ -14,93 +14,50 @@
 
         <div class="flex justify-around">
             <div
-                className="row-span-1 lg:row-span-2  grid grid-row-4 shadow-md h-32 w-[200px] my-5 rounded-lg bg-white sm:m-3 lg:m-0 lg:my-1 "
+                className="row-span-1 lg:row-span-2  grid grid-row-3 shadow-md h-24 w-[280px] my-5 rounded-lg bg-white sm:m-3 lg:m-0 lg:my-1  "
             >
-                <div className="row-span-1">
-                    <div
-                        className="flex justify-end p-2 text-green-500 text-xl "
-                    >
-                        <!-- <v-icon icon="fas fa arrow-up" /> -->
-                        <!-- <p className="px-2 text-sm">+ 2 %</p> -->
-                    </div>
-                </div>
                 <div className="row-span-1"></div>
                 <div className="row-span-1"></div>
                 <div className="row-span-1">
                     <div className="flex flex-col justify-start p-2 ">
-                        <span className="text-3xl mb-1">7 </span>
-                        <span className="text-md text-gray-400">
-                            Total visits today 
+                       
+                        <span className="text-md text-gray-400 pb-5">
+                           Last Login
                         </span>
+                        <span className="text-xl mb-1 flex justify-end"> wed 7th 2022</span>
                     </div>
                 </div>
             </div>
             <div
-                className="row-span-1 lg:row-span-2  grid grid-row-4 shadow-md h-32 w-[200px] my-5 rounded-lg bg-white sm:m-3 lg:m-0 lg:my-1 "
+                className="row-span-1 lg:row-span-2  grid grid-row-3 shadow-md h-24 w-[280px] my-5 rounded-lg bg-white sm:m-3 lg:m-0 lg:my-1  "
             >
-                <div className="row-span-1">
-                    <div
-                        className="flex justify-end p-2 text-green-500 text-xl "
-                    >
-                        <!-- <v-icon icon="fas fa arrow-up" /> -->
-                        <!-- <p className="px-2 text-sm">+ 2 %</p> -->
-                    </div>
-                </div>
                 <div className="row-span-1"></div>
                 <div className="row-span-1"></div>
                 <div className="row-span-1">
                     <div className="flex flex-col justify-start p-2 ">
-                        <span className="text-3xl mb-1">7 </span>
-                        <span className="text-md text-gray-400">
-                            Total users
+                      
+                        <span className="text-md text-gray-400 pb-5">
+                          Department
                         </span>
+                        <span className="text-xl text-gray-700 mb-1 flex justify-end"> Marketing </span>
                     </div>
                 </div>
             </div>
             <div
-                className="row-span-1 lg:row-span-2  grid grid-row-4 shadow-md h-32 w-[200px] my-5 rounded-lg bg-white sm:m-3 lg:m-0 lg:my-1 "
+                className="row-span-1 lg:row-span-2  grid grid-row-3 shadow-md h-24 w-[280px] my-5 rounded-lg bg-white sm:m-3 lg:m-0 lg:my-1  "
             >
-                <div className="row-span-1">
-                    <div
-                        className="flex justify-end p-2 text-green-500 text-xl"
-                    >
-                        <!-- <v-icon icon="fas fa arrow-up" />
-                        <p className="px-2 text-sm">+ 2 %</p> -->
-                    </div>
-                </div>
                 <div className="row-span-1"></div>
                 <div className="row-span-1"></div>
                 <div className="row-span -1">
                     <div className="flex flex-col justify-start p-2 ">
-                        <span className="text-3xl mb-1">17 </span>
-                        <span className="text-md text-gray-400">
-                            Saved Credentials
+                        <span className="text-md text-gray-400 pb-5">
+                          Credentials
                         </span>
+                        <span className="text-xl text-gray-700 mb-1 flex justify-end"> 3 </span>
                     </div>
                 </div>
             </div>
-            <div
-                className="row-span-1 lg:row-span-2  grid grid-row-4 shadow-md h-32 w-[200px] my-5 rounded-lg bg-white sm:m-3 lg:m-0 lg:my-1 "
-            >
-                <div className="row-span-1">
-                    <div
-                        className="flex justify-end p-2 text-green-500 text-xl "
-                    >
-                        <!-- <v-icon icon="fas fa arrow-up" />
-                        <p className="px-2 text-sm">+ 2 %</p> -->
-                    </div>
-                </div>
-                <div className="row-span-1"></div>
-                <div className="row-span-1"></div>
-                <div className="row-span-1">
-                    <div className="flex flex-col justify-start p-2 ">
-                        <span className="text-3xl mb-1">7 </span>
-                        <span className="text-md text-gray-400">
-                            Departments
-                        </span>
-                    </div>
-                </div>
-            </div>
+        
         </div>
     </div>
 </template>
