@@ -71,7 +71,7 @@ class AdminController extends Controller
             'password' => Hash::make($request->credentials),
             'organization' => $request->organization,
             'notes' => $request->notes,
-            'department' => $request->departments,
+            'department' => $request->department,
         ]);
 
         return response()->json([

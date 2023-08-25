@@ -95,7 +95,7 @@ export default {
         const organization = ref("");
         const notes = ref("");
         const password = ref("");
-        const department = ref("");
+        const department = ref([]);
         const departments = ref([]);
 
         const headers = [];

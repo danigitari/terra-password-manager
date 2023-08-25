@@ -76,17 +76,81 @@
     <div class="m-5 bg-white shadow-lg rounded-md p-2">
         <EasyDataTable :headers="headers" :items="items" border-cell>
             <template #item-edit-operation="item">
-                <div class="flex items-center justify-center">
-                    <button
-                        class="rounded-full bg-blue-600 py-1 px-4 text-white text-sm shadow-md"
-                        @click="showEditModal(item.id)"
-                    >
-                        <v-icon
-                            icon="mdi-account-edit-outline"
-                            class="px-3"
-                        ></v-icon>
-                    </button>
-                </div>
+                <v-dialog v-model="editDialog" persistent width="720">
+                    <template v-slot:activator="{ props }">
+                        <div class="flex items-center justify-center">
+                            <button
+                                class="rounded-full bg-blue-600 py-1 px-4 text-white text-sm shadow-md"
+                                @click="showEditModal(item.id)"
+                                v-bind="props"
+                            >
+                                <v-icon
+                                    icon="mdi-account-edit-outline"
+                                    class="px-3"
+                                ></v-icon>
+                            </button>
+                        </div>
+                    </template>
+                    <v-card>
+                        <v-card-title>
+                            <span class="text-h6">Edit User</span>
+                        </v-card-title>
+                        <hr />
+                        <v-card-text>
+                            <v-container>
+                                <v-row>
+                                    <v-col cols="12" sm="6" md="6">
+                                        <v-text-field
+                                            label="Full Name"
+                                            v-model="name"
+                                        ></v-text-field>
+                                    </v-col>
+                                    <v-col cols="12" sm="6" md="6">
+                                        <v-select
+                                            :items="[
+                                                'Development',
+                                                'Sales',
+                                                'Finance',
+                                            ]"
+                                            label="Department"
+                                            required
+                                            v-model="department"
+                                        ></v-select>
+                                    </v-col>
+                                    <v-col cols="12" sm="6" md="6">
+                                        <v-text-field
+                                            label="Phone Number*"
+                                            required
+                                            v-model="phoneNumber"
+                                        ></v-text-field>
+                                    </v-col>
+                                    <v-col cols="12" sm="6" md="6">
+                                        <v-text-field
+                                            label="Email*"
+                                            required
+                                            v-model="email"
+                                        ></v-text-field>
+                                    </v-col>
+                                </v-row>
+                            </v-container>
+                        </v-card-text>
+                        <v-card-actions class="m-5">
+                            <v-spacer></v-spacer>
+                            <button
+                                class="rounded-sm bg-red-600 py-2 px-4 text-white text-sm rounded-md shadow-md"
+                                @click="editDialog = false"
+                            >
+                                Close
+                            </button>
+                            <button
+                                class="rounded-sm bg-[#303690] py-2 px-4 text-white text-sm rounded-md shadow-md ml-4"
+                                @click="showEditModal(item.id)"
+                            >
+                                Save
+                            </button>
+                        </v-card-actions>
+                    </v-card>
+                </v-dialog>
             </template>
 
             <template #item-delete-operation="item">
@@ -154,6 +218,66 @@ export default {
                 });
             getUsers();
         }
+        function editUser(id) {
+            axios
+                .post(
+                    "http://127.0.0.1:8000/api/editUser",
+                    {
+                        name: name.value,
+                        department: department.value,
+                        email: email.value,
+                        phone_number: phoneNumber.value,
+                        id: id,
+                    },
+                    {
+                        headers: {
+                            Accept: "application/json",
+                            "Content-Type": "application/json",
+                            "X-Requested-With": "XMLHttpRequest",
+                            Authorization:
+                                "Bearer " + localStorage.getItem("token"),
+                        },
+                    }
+                )
+                .then((response) => {
+                    console.log(response.data);
+                    editDialog.value = false;
+                })
+                .catch((error) => {
+                    console.log(error);
+                });
+            getUsers();
+        }
+
+        function deleteUser() {
+            axios
+                .post(
+                    "http://127.0.0.1:8000/api/deleteUser",
+                    {
+                        name: name.value,
+                        department: department.value,
+                        email: email.value,
+                        phone_number: phoneNumber.value,
+                    },
+                    {
+                        headers: {
+                            Accept: "application/json",
+                            "Content-Type": "application/json",
+                            "X-Requested-With": "XMLHttpRequest",
+                            Authorization:
+                                "Bearer " + localStorage.getItem("token"),
+                        },
+                    }
+                )
+                .then((response) => {
+                    console.log(response.data);
+                    dialog.value = false;
+                })
+                .catch((error) => {
+                    console.log(error);
+                });
+            getUsers();
+        }
 
         function getUsers() {
             axios
@@ -175,11 +299,17 @@ export default {
         }
         const items = ref([]);
         function showDeleteModal(id) {
-            
+            deleteDialog.value = true;
+            deleteUser(id);
         }
 
-        function showEditModal(id) {}
+        function showEditModal(id) {
+            editDialog.value = true;
+            // editUser(id);
+        }
         const dialog = ref(false);
+        const editDialog = ref(false);
+        const deleteDialog = ref(false);
         return {
             headers,
             items,
@@ -193,6 +323,11 @@ export default {
             users,
             showDeleteModal,
             showEditModal,
+            editDialog,
+            editUser,
+            deleteUser,
+            deleteDialog,
+            editDialog,
         };
     },
 };
