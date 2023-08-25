@@ -1,12 +1,12 @@
 <template>
     <div class="m-5">
-        <div class="w-full flex justify-between items-center ">
+        <div class="w-full flex justify-between items-center">
             <p class="px-5">Hello Daniel 👋</p>
             <button
                 className="flex px-2 mx-5 py-2  items-center rounded-md text-white text-sm bg-yellow-400 shadow-lg"
             >
                 <p className="text-md">
-                    <v-icon icon="mdi-sync"  />
+                    <v-icon icon="mdi-sync" />
                 </p>
                 <p className="pl-1 pr-2">Refresh</p>
             </button>
@@ -20,11 +20,12 @@
                 <div className="row-span-1"></div>
                 <div className="row-span-1">
                     <div className="flex flex-col justify-start p-2 ">
-                       
                         <span className="text-md text-gray-400 pb-5">
-                           Last Login
+                            Last Login
                         </span>
-                        <span className="text-xl mb-1 flex justify-end"> wed 7th 2022</span>
+                        <span className="text-xl mb-1 flex justify-end">
+                            wed 7th 2022</span
+                        >
                     </div>
                 </div>
             </div>
@@ -35,11 +36,14 @@
                 <div className="row-span-1"></div>
                 <div className="row-span-1">
                     <div className="flex flex-col justify-start p-2 ">
-                      
                         <span className="text-md text-gray-400 pb-5">
-                          Department
+                            Department
                         </span>
-                        <span className="text-xl text-gray-700 mb-1 flex justify-end"> Marketing </span>
+                        <span
+                            className="text-xl text-gray-700 mb-1 flex justify-end"
+                        >
+                            Marketing
+                        </span>
                     </div>
                 </div>
             </div>
@@ -51,13 +55,30 @@
                 <div className="row-span -1">
                     <div className="flex flex-col justify-start p-2 ">
                         <span className="text-md text-gray-400 pb-5">
-                          Credentials
+                            Credentials
                         </span>
-                        <span className="text-xl text-gray-700 mb-1 flex justify-end"> 3 </span>
+                        <span
+                            className="text-xl text-gray-700 mb-1 flex justify-end"
+                        >
+                            3
+                        </span>
                     </div>
                 </div>
             </div>
-        
+        </div>
+
+        <div class="rounded-md p-2 shadow-md bg-white m-2">
+            <EasyDataTable :headers="headers" :items="items" border-cell />
         </div>
     </div>
 </template>
+
+<script>
+export default {
+    setup() {
+        const headers = [];
+        const items = [];
+        return { headers, items };
+    },
+};
+</script>

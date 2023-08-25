@@ -33,3 +33,23 @@ export async function getUsers() {
         return error;
     }
 }
+export async function getRoles() { 
+    try {
+        const res = await api.get('/getRoles');
+        return res.data;
+    }
+    catch(error) {
+        console.error(error);
+        return error;
+    }
+}
+export async function getCredentials() { 
+    try {
+        const res = await api.get('/getCredentials');
+        return res.data;
+    }
+    catch(error) {
+        console.error(error);
+        return error;
+    }
+}

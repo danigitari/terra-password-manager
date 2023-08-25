@@ -11,9 +11,13 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('credentails', function (Blueprint $table) {
+        Schema::create('credentials', function (Blueprint $table) {
             $table->id();
             $table->timestamps();
+            $table->string('organization');
+            $table->string('notes');
+            $table->string('password');
+            $table->string('department')->default(0);
         });
     }
 
@@ -22,6 +26,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('credentails');
+        Schema::dropIfExists('credentials');
     }
 };

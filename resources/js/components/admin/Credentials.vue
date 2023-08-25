@@ -18,11 +18,7 @@
                     <v-card-text>
                         <v-container>
                             <v-row>
-                                <v-col cols="12" sm="6" md="6">
-                                    <v-text-field
-                                        label="Full Name"
-                                    ></v-text-field>
-                                </v-col>
+    
                                 <v-col cols="12" sm="6" md="6">
                                     <v-select
                                         :items="[
@@ -69,7 +65,7 @@
                         </button>
                         <button
                             class="rounded-sm bg-[#303690] py-2 px-4 text-white text-sm rounded-md shadow-md ml-4"
-                            @click="dialog = false"
+                            @click="addNewCredential"
                         >
                             Save
                         </button>
@@ -85,10 +81,9 @@
 
 // import { Header, Item } from "vue3-easy-data-table";
 <script>
-import { ref } from "vue";
+import { ref , onMounted } from "vue";
 export default {
     setup() {
-        const name = ref("");
         const organization = ref("");
         const notes = ref("");
         const password = ref("");
@@ -102,7 +97,6 @@ export default {
                 .post(
                     "http://127.0.0.1:8000/api/createNewCredential",
                     {
-                        name: name.value,
                         organization: organization.value,
                         password: password.value,
                         notes: notes.value,
@@ -126,17 +120,20 @@ export default {
                     console.log(error);
                 });
         }
+        function getCreds(){
+
+        }
         const dialog = ref(false);
         return {
             headers,
             items,
             dialog,
             addNewCredential,
-            name,
             organization,
             notes,
             password,
             department,
+            getCreds
         };
     },
 };

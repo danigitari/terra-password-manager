@@ -77,15 +77,21 @@
     </div>
 </template>
 <script>
- import { onMounted } from "vue";
- import { getUsers } from '../api/services.js'
+ import { onMounted , ref } from "vue";
+ import { getUsers , getCredentials , getRoles } from '../api/services.js'
 export default {
     setup() {
+
+        const users = ref([])
+        const credentials = ref([])
+        const roles = ref([])
+        const items = ref([])
         onMounted(async () => {
-            const data = await getUsers()
-            console.log(data)
+            users.value = await getUsers();
+            credentials.value = await getCredentials();
+            roles.value = await getRoles();
 
-
+            console.log(users.value)
            
         })
         const headers = [
@@ -96,12 +102,15 @@ export default {
             { text: "Last logged in", value: "date" },
         ];
 
-        const items = [
-           
-        ];
+     
         return {
             headers,
             items,
+            users,
+            credentials,
+            roles,
+            items,
+            
         };
     },
 };

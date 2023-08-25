@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Models\User;
 use Illuminate\Support\Facades\Hash;
 use Carbon\Carbon;
+use App\Models\log;
 
 class AuthController extends Controller
 {   public function register(Request $request) {
@@ -39,7 +40,13 @@ class AuthController extends Controller
         
         } 
 
-        $last_login = Carbon::now('Africa/Nairobi')->toDateTimeString();
+        // $last_login = Carbon::now('Africa/Nairobi')->toDateTimeString();
+        // $all_logins = $user->log->all_logins;
+        // array_push($all_logins, $last_login);
+        // $user->log->all_logins = $all_logins;
+        // $user->log->last_login = $last_login;
+        // $user->log->save();
+
 
         $token = $user->createToken('authToken')->plainTextToken;
 

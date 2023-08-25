@@ -88,6 +88,7 @@ export default {
         const error = ref(false);
         const handleLogin = async () => {
             const res = await login(formData);
+            console.log();
             if(res.response){
             if (res.response.status === 401) {
                 error.value = true;
@@ -98,7 +99,7 @@ export default {
             }
 
             if (res.status === 200) {
-                if (res.data.role === "admin") {
+                if (res.data.role[0] === "admin") {
                     localStorage.setItem("token", res.data.token);
                     router.push("/dashboard");
                 }
