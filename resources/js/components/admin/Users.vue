@@ -75,13 +75,13 @@
 
     <div class="m-5 bg-white shadow-lg rounded-md p-2">
         <EasyDataTable :headers="headers" :items="items" border-cell>
-            <template #item-edit-operation="item">
+            <template #item-edit-operation="selectedItem">
                 <v-dialog v-model="editDialog" persistent width="720">
                     <template v-slot:activator="{ props }">
                         <div class="flex items-center justify-center">
                             <button
                                 class="rounded-full bg-blue-600 py-1 px-4 text-white text-sm shadow-md"
-                                @click="showEditModal(item.id)"
+                                @click="showEditModal(selectedItem)"
                                 v-bind="props"
                             >
                                 <v-icon
@@ -144,7 +144,7 @@
                             </button>
                             <button
                                 class="rounded-sm bg-[#303690] py-2 px-4 text-white text-sm rounded-md shadow-md ml-4"
-                                @click="showEditModal(item.id)"
+                                @click="editUser(selectedItem)"
                             >
                                 Save
                             </button>
@@ -153,11 +153,11 @@
                 </v-dialog>
             </template>
 
-            <template #item-delete-operation="item">
+            <template #item-delete-operation="selectedItem">
                 <div class="operation-wrapper">
                     <button
                         class="rounded-full bg-red-600 py-1 px-4 text-white text-sm shadow-md"
-                        @click="showDeleteModal(item.id)"
+                        @click="showDeleteModal(selectedItem.id)"
                     >
                         <v-icon icon="mdi-delete-outline" class="px-3"></v-icon>
                     </button>
@@ -219,6 +219,8 @@ export default {
             getUsers();
         }
         function editUser(id) {
+            console.log(item.value.id)
+
             axios
                 .post(
                     "http://127.0.0.1:8000/api/editUser",
@@ -227,7 +229,7 @@ export default {
                         department: department.value,
                         email: email.value,
                         phone_number: phoneNumber.value,
-                        id: id,
+                        id: item.value.id,
                     },
                     {
                         headers: {
@@ -298,14 +300,20 @@ export default {
                 });
         }
         const items = ref([]);
+        const item =  ref({})
         function showDeleteModal(id) {
             deleteDialog.value = true;
             deleteUser(id);
         }
 
-        function showEditModal(id) {
-            editDialog.value = true;
-            // editUser(id);
+        function showEditModal(selectedItem) {
+            item.value = selectedItem
+            console.log(item.value.id)
+            editDialog.value = true;          
+            name.value = item.value.name
+            department.value = item.value.department
+            phoneNumber.value = item.value.phone_number
+            email.value = item.value.email
         }
         const dialog = ref(false);
         const editDialog = ref(false);
@@ -328,6 +336,7 @@ export default {
             deleteUser,
             deleteDialog,
             editDialog,
+            item
         };
     },
 };

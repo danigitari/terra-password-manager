@@ -35,7 +35,7 @@ class AdminController extends Controller
         $user->name = $request->name;
         $user->phone_number = $request->phone_number;
         $user->department = $request->department;
-        $user->save();
+        $user->update();
 
         return response()->json([
             'message' => 'User Updated Successfully',
