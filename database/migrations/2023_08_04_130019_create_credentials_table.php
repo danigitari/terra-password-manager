@@ -18,6 +18,8 @@ return new class extends Migration
             $table->string('notes');
             $table->string('password');
             $table->string('department')->default(0);
+            $table->string('otherInfo')->default(0);
+            $table->string('username')->default(0);
         });
     }
 

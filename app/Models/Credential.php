@@ -13,6 +13,8 @@ class Credential extends Model
         'password',
         'notes',
         'department',
+        'username',
+        'otherInfo'
 
     ];
 

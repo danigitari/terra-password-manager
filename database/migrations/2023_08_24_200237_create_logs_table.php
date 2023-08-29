@@ -14,6 +14,12 @@ return new class extends Migration
         Schema::create('logs', function (Blueprint $table) {
             $table->id();
             $table->timestamps();
+            $table->foreignId('user_id');
+            $table->string('last_login')->nullable();
+            $table->json('all_logins')->nullable();
+            $table->string('last_credential_copied')->nullable();
+            $table->json('all_credentials_copied')->nullable();
+            $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
         });
     }
 

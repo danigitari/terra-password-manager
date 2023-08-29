@@ -21,6 +21,7 @@ return new class extends Migration
             $table->string('department')->default(0);
             $table->rememberToken();
             $table->timestamps();
+            
         });
     }
 

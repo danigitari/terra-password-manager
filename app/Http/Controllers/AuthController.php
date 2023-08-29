@@ -29,6 +29,8 @@ class AuthController extends Controller
 
     Public function login(Request $request) 
     {
+
+        
         $user = User::where('email', $request->email)->first();
 
         if (!$user || !Hash::check($request->password, $user->password)) {
@@ -40,13 +42,12 @@ class AuthController extends Controller
         
         } 
 
-        // $last_login = Carbon::now('Africa/Nairobi')->toDateTimeString();
-        // $all_logins = $user->log->all_logins;
-        // array_push($all_logins, $last_login);
-        // $user->log->all_logins = $all_logins;
-        // $user->log->last_login = $last_login;
-        // $user->log->save();
-
+        $last_login = Carbon::now('Africa/Nairobi')->toDateTimeString();
+        $logins = $user->logs->all_logins ? $user->logs->all_logins: [Carbon::now('Africa/Nairobi')->toDateTimeString()];
+        array_push($logins, $last_login);
+        $user->logs->all_logins = $logins;
+        $user->logs->last_login = $last_login;
+        $user->logs->save();
 
         $token = $user->createToken('authToken')->plainTextToken;
 

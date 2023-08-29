@@ -84,10 +84,7 @@
                                 @click="showEditModal(selectedItem)"
                                 v-bind="props"
                             >
-                                <v-icon
-                                    icon="mdi-account-edit-outline"
-                                    class="px-3"
-                                ></v-icon>
+       edit
                             </button>
                         </div>
                     </template>
@@ -154,12 +151,13 @@
             </template>
 
             <template #item-delete-operation="selectedItem">
+                
                 <div class="operation-wrapper">
                     <button
                         class="rounded-full bg-red-600 py-1 px-4 text-white text-sm shadow-md"
                         @click="showDeleteModal(selectedItem.id)"
                     >
-                        <v-icon icon="mdi-delete-outline" class="px-3"></v-icon>
+                       delete
                     </button>
                 </div>
             </template>
@@ -187,6 +185,8 @@ export default {
             { text: "Phone Number ", value: "phone_number" },
             { text: "Edit", value: "edit-operation" },
             { text: "Delete", value: "delete-operation" },
+            
+            
         ];
 
         function addNewUser() {
@@ -251,15 +251,12 @@ export default {
             getUsers();
         }
 
-        function deleteUser() {
+        function deleteUser(a) {
             axios
                 .post(
                     "http://127.0.0.1:8000/api/deleteUser",
                     {
-                        name: name.value,
-                        department: department.value,
-                        email: email.value,
-                        phone_number: phoneNumber.value,
+                    id:item.value.id
                     },
                     {
                         headers: {
@@ -301,9 +298,10 @@ export default {
         }
         const items = ref([]);
         const item =  ref({})
-        function showDeleteModal(id) {
+        function showDeleteModal(selectedItem) {
+            item.value = selectedItem
             deleteDialog.value = true;
-            deleteUser(id);
+            deleteUser(item.value.id);
         }
 
         function showEditModal(selectedItem) {

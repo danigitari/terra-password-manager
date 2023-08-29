@@ -20,7 +20,7 @@
                 <div className="row-span-1"></div>
                 <div className="row-span-1">
                     <div className="flex flex-col justify-start p-2 ">
-                        <span className="text-3xl mb-1">7 </span>
+                        <span className="text-3xl mb-1"> 6 </span>
                         <span className="text-md text-gray-400">
                             Total visits today
                         </span>
@@ -79,6 +79,18 @@
         <p class="text-gray-600 text-lg m-3">Logs</p>
         <div class="rounded-md p-2 shadow-md bg-white m-2">
             <EasyDataTable :headers="headers" :items="items" border-cell>
+                <template #item-date-operation="item">
+                    <div class="operation-wrapper">
+                        {{
+                            item.logs
+                                ? new Date(item.logs.last_login)
+                                      .toString()
+                                      .slice(0, 24)
+                                : " no logs"
+                        }}
+                    </div></template
+                >
+
                 <template #item-operation="item">
                     <div class="operation-wrapper">
                         <button
@@ -95,27 +107,39 @@
 </template>
 <script>
 import { onMounted, ref } from "vue";
-import { getUsers, getCredentials, getRoles } from "../api/services.js";
+import {
+    getUsers,
+    getCredentials,
+    getRoles,
+    getLogs,
+} from "../api/services.js";
 export default {
     setup() {
         const users = ref([]);
         const credentials = ref([]);
         const roles = ref([]);
         const items = ref([]);
+        const logs = ref([]);
+
         onMounted(async () => {
             users.value = await getUsers();
             credentials.value = await getCredentials();
             roles.value = await getRoles();
-
-            console.log(users.value);
+            items.value = await getLogs();
+            items.value.map((item) => {
+                if (item.logs) {
+                    console.log(item);
+                    console.log(
+                        new Date(item.logs.last_login).toString().slice(0, 24)
+                    );
+                }
+            });
         });
         const headers = [
             { text: "Name ", value: "name" },
             { text: "Department ", value: "department" },
             { text: "Email ", value: "email" },
-            // { text: "Credentials Copied", value: "number" },
-            { text: "Last logged in", value: "date" },
-            // {  text: "Operation", value: "operation", width: "100px", sortable: false}
+            { text: "Last logged in", value: "date-operation" },
         ];
         function deleteItem(id) {
             axios;
@@ -129,6 +153,7 @@ export default {
             roles,
             items,
             deleteItem,
+            logs,
         };
     },
 };

@@ -11,7 +11,6 @@ export async function login(loginCredentials) {
                     Accept: "application/json",
                     "Content-Type": "application/json",
                     "X-Requested-With": "XMLHttpRequest",
-                    Authorization: "Bearer " + localStorage.getItem("token"),
                 },
             }
         );
@@ -27,6 +26,16 @@ export async function getUsers() {
     try {
         const res = await api.get('/getUsers');
         return res.data;
+    }
+    catch(error) {
+        console.error(error);
+        return error;
+    }
+}
+export async function getLogs() { 
+    try {
+        const res = await api.get('/getLogs');
+        return res.data.users;
     }
     catch(error) {
         console.error(error);
