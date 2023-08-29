@@ -1,7 +1,7 @@
 <template>
     <div class="m-5">
         <div class="w-full flex justify-between items-center">
-            <p class="px-5">Hello Daniel 👋</p>
+            <p class="px-5">Hello  {{ users.current_user.name }}  👋</p>
             <button
                 className="flex px-2 mx-5 py-2  items-center rounded-md text-white text-sm bg-yellow-400 shadow-lg"
             >

@@ -84,7 +84,7 @@
                                 @click="showEditModal(selectedItem)"
                                 v-bind="props"
                             >
-       edit
+                                edit
                             </button>
                         </div>
                     </template>
@@ -151,14 +151,18 @@
             </template>
 
             <template #item-delete-operation="selectedItem">
-                
                 <div class="operation-wrapper">
                     <button
                         class="rounded-full bg-red-600 py-1 px-4 text-white text-sm shadow-md"
                         @click="showDeleteModal(selectedItem.id)"
                     >
-                       delete
+                        delete
                     </button>
+                </div>
+            </template>
+            <template #item-operation="selectedItem">
+                <div class="operation-wrapper">
+                    {{ selectedItem.roles[0].name }}
                 </div>
             </template>
         </EasyDataTable>
@@ -180,13 +184,11 @@ export default {
         const email = ref("");
         const headers = [
             { text: "Name ", value: "name" },
-            { text: "Department ", value: "department" },
+            { text: "Department ", value: "operation" },
             { text: "Email ", value: "email" },
             { text: "Phone Number ", value: "phone_number" },
             { text: "Edit", value: "edit-operation" },
             { text: "Delete", value: "delete-operation" },
-            
-            
         ];
 
         function addNewUser() {
@@ -219,7 +221,7 @@ export default {
             getUsers();
         }
         function editUser(id) {
-            console.log(item.value.id)
+            console.log(item.value.id);
 
             axios
                 .post(
@@ -256,7 +258,7 @@ export default {
                 .post(
                     "http://127.0.0.1:8000/api/deleteUser",
                     {
-                    id:item.value.id
+                        id: item.value.id,
                     },
                     {
                         headers: {
@@ -293,25 +295,25 @@ export default {
                 .then((response) => {
                     users.value = response.data.users;
                     items.value = users.value;
-                    console.log(response.data);
+                    console.log(response.data.users);
                 });
         }
         const items = ref([]);
-        const item =  ref({})
+        const item = ref({});
         function showDeleteModal(selectedItem) {
-            item.value = selectedItem
+            item.value = selectedItem;
             deleteDialog.value = true;
             deleteUser(item.value.id);
         }
 
         function showEditModal(selectedItem) {
-            item.value = selectedItem
-            console.log(item.value.id)
-            editDialog.value = true;          
-            name.value = item.value.name
-            department.value = item.value.department
-            phoneNumber.value = item.value.phone_number
-            email.value = item.value.email
+            item.value = selectedItem;
+            console.log(item.value.id);
+            editDialog.value = true;
+            name.value = item.value.name;
+            department.value = item.value.department;
+            phoneNumber.value = item.value.phone_number;
+            email.value = item.value.email;
         }
         const dialog = ref(false);
         const editDialog = ref(false);
@@ -334,7 +336,7 @@ export default {
             deleteUser,
             deleteDialog,
             editDialog,
-            item
+            item,
         };
     },
 };

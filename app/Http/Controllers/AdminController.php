@@ -118,7 +118,8 @@ class AdminController extends Controller
     public function getUsers()
     {
 
-        $users = User::all();
+        $users = User::with('roles')->get();
+    
         $userCount = User::count();
         $adminCount = User::with('roles')->get()->filter(
             fn ($user) => $user->roles->where('name', 'admin')->toArray()
@@ -141,6 +142,7 @@ class AdminController extends Controller
 
         return response()->json([
             'users' => $users,
+            'current_user' => auth()->user(),
             'userCount' => $userCount,
             'adminCount' => ['adminUsers' =>  $adminCount],
             'developerCount' => $developerCount,

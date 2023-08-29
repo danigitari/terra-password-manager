@@ -53,6 +53,12 @@
         {{  new Date(selectedItem.created_at).toString().slice(0, 24) }}
                 </div>
             </template>
+            
+            <template #item-operation="selectedItem">
+                <div class="operation-wrapper">
+                    {{ users.filter((user) => user.roles[0].name == selectedItem.name).length }}
+                </div>
+            </template> 
             <template #item-edit-operation="selectedItem">
                 <div class="operation-wrapper">
                     <button
@@ -154,7 +160,7 @@ export default {
         }
         const headers = [
             { text: "Department ", value: "name" },
-            { text: "Number of users ", value: "number_of_users" },
+            { text: "Number of users ", value: "operation" },
             { text: "Created at ", value: "date-operation" },
             { text: "Edit", value: "edit-operation" },
             { text: "Delete", value: "delete-operation" },
@@ -275,6 +281,7 @@ export default {
             getUsers,
             departmentUserCount,
             newItems,
+            users
         };
     },
 };
