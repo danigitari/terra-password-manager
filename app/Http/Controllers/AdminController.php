@@ -55,11 +55,11 @@ class AdminController extends Controller
             'name' => $request->name,
             'email' => $request->email,
             'password' => $request->name,
-            'phone_number' => $request->phone_number,
+            'phone_number' => $request->phoneNumber,
         ])->assignRole($request->admin);
 
         return response()->json([
-            'message' => 'AdminCreated Successfully',
+            'message' => 'Admin Created Successfully',
         ]);
     }
 

@@ -25,7 +25,7 @@ Route::post('/register', [\App\Http\Controllers\AuthController::class, 'register
 
 Route::group(['middleware' => ['auth:sanctum']], function () {
     Route::group(['middleware' => ['role:admin']], function () {
-        Route::get('/addNewAdmin', [\App\Http\Controllers\AdminController::class, 'addNewAdmin']);
+        Route::post('/addNewAdmin', [\App\Http\Controllers\AdminController::class, 'addNewAdmin']);
 
         Route::post('/createUsers', [\App\Http\Controllers\AdminController::class, 'createUsers']);
         Route::get('/getUsers', [\App\Http\Controllers\AdminController::class, 'getUsers']);

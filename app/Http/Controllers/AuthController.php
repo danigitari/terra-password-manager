@@ -43,7 +43,7 @@ class AuthController extends Controller
         } 
 
         $last_login = Carbon::now('Africa/Nairobi')->toDateTimeString();
-        $logins = $user->logs->all_logins ? $user->logs->all_logins: [Carbon::now('Africa/Nairobi')->toDateTimeString()];
+        $logins = $user->logs->all_logins ? $user->logs->all_logins : [Carbon::now('Africa/Nairobi')->toDateTimeString()];
         array_push($logins, $last_login);
         $user->logs->all_logins = $logins;
         $user->logs->last_login = $last_login;

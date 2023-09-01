@@ -21,7 +21,7 @@
                                 <v-col cols="12">
                                     <v-text-field
                                         label=" Name of Department"
-                                        v-model="departments"
+                                        v-model="department"
                                     ></v-text-field>
                                 </v-col>
                             </v-row>
@@ -37,7 +37,7 @@
                         </button>
                         <button
                             class="rounded-sm bg-[#303690] py-2 px-4 text-white text-sm rounded-md shadow-md ml-4"
-                            @click="editDepartment"
+                            @click="addNewDepartment"
                         >
                             Save
                         </button>
@@ -50,15 +50,23 @@
         <EasyDataTable :headers="headers" :items="newItems" border-cell>
             <template #item-date-operation="selectedItem">
                 <div class="operation-wrapper">
-        {{  new Date(selectedItem.created_at).toString().slice(0, 24) }}
+                    {{
+                        new Date(selectedItem.created_at)
+                            .toString()
+                            .slice(0, 24)
+                    }}
                 </div>
             </template>
-            
+
             <template #item-operation="selectedItem">
                 <div class="operation-wrapper">
-                    {{ users.filter((user) => user.roles[0].name == selectedItem.name).length }}
+                    {{
+                        users.filter(
+                            (user) => user.roles[0].name == selectedItem.name
+                        ).length
+                    }}
                 </div>
-            </template> 
+            </template>
             <template #item-edit-operation="selectedItem">
                 <div class="operation-wrapper">
                     <button
@@ -199,7 +207,7 @@ export default {
                 .catch((error) => {
                     console.log(error);
                 });
-                getDepartments();
+            getDepartments();
         }
         function editDepartment() {
             axios
@@ -271,6 +279,7 @@ export default {
             addNewDepartment,
             department,
             getDepartments,
+
             showEditModal,
             showDeleteModal,
             items,
@@ -281,7 +290,7 @@ export default {
             getUsers,
             departmentUserCount,
             newItems,
-            users
+            users,
         };
     },
 };

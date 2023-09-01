@@ -67,13 +67,19 @@
 </template>
 
 <script>
-import { ref } from "vue";
+import { ref , onMounted } from "vue";
 import axios from "axios";
 export default {
     setup() {
         const name = ref("");
         const phoneNumber = ref("");
         const email = ref("");
+        const items = ref([]);
+
+        onMounted(() => {
+            getUsers();
+        });
+
         const headers = [
             { text: "Name ", value: "name" },
             { text: "Email ", value: "email" },
@@ -88,7 +94,7 @@ export default {
                     {
                         name: name.value,
                         email: email.value,
-                        number: phoneNumber.value,
+                        phoneNumber: phoneNumber.value,
                     },
                     {
                         headers: {
@@ -108,7 +114,6 @@ export default {
                     console.log(error);
                 });
         }
-
         function getUsers() {
             axios
                 .get("http://127.0.0.1:8000/api/getUsers", {
@@ -122,10 +127,11 @@ export default {
                     },
                 })
                 .then((response) => {
-                    console.log(response.data);
+                    console.log(response.data.users.filter(user => user.roles[0] != undefined ).filter(user => user.roles[0].name == "admin"));
+                     items.value = response.data.users.filter(user => user.roles[0] != undefined ).filter(user => user.roles[0].name == "admin")
                 });
         }
-        const items = [];
+
         const dialog = ref(false);
         return {
             headers,
@@ -136,6 +142,7 @@ export default {
             name,
             phoneNumber,
             email,
+    
         };
     },
 };

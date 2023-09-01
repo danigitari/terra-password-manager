@@ -1,7 +1,9 @@
 <template>
     <div class="m-5">
         <div class="w-full flex justify-between items-center">
-            <p class="px-5">Hello  {{ users.current_user.name }}  👋</p>
+            <p class="px-5" v-if="users.current_user">
+                Hello {{ users.current_user.name }} 👋
+            </p>
             <button
                 className="flex px-2 mx-5 py-2  items-center rounded-md text-white text-sm bg-yellow-400 shadow-lg"
             >
@@ -106,7 +108,7 @@
     </div>
 </template>
 <script>
-import { onMounted, ref } from "vue";
+import { onMounted, onBeforeMount, ref } from "vue";
 import {
     getUsers,
     getCredentials,
@@ -121,8 +123,12 @@ export default {
         const items = ref([]);
         const logs = ref([]);
 
+        onBeforeMount(() => {});
+
         onMounted(async () => {
             users.value = await getUsers();
+            console.log( " users" , users.value) ;
+
             credentials.value = await getCredentials();
             roles.value = await getRoles();
             items.value = await getLogs();

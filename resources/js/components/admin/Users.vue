@@ -26,14 +26,11 @@
                                 </v-col>
                                 <v-col cols="12" sm="6" md="6">
                                     <v-select
-                                        :items="[
-                                            'Development',
-                                            'Sales',
-                                            'Finance',
-                                        ]"
+                                        :items="departments"
                                         label="Department"
                                         required
                                         v-model="department"
+                                        multiple
                                     ></v-select>
                                 </v-col>
                                 <v-col cols="12" sm="6" md="6">
@@ -162,7 +159,11 @@
             </template>
             <template #item-operation="selectedItem">
                 <div class="operation-wrapper">
-                    {{ selectedItem.roles[0].name }}
+                    {{
+                        selectedItem.roles
+                            ? selectedItem.roles[0].name
+                            : "unassigned department"
+                    }}
                 </div>
             </template>
         </EasyDataTable>
@@ -176,6 +177,7 @@ export default {
     setup() {
         onMounted(() => {
             getUsers();
+            getDepartments();
         });
         const users = ref([]);
         const name = ref("");
@@ -280,6 +282,35 @@ export default {
             getUsers();
         }
 
+        function getDepartments() {
+            axios
+                .get(
+                    "http://127.0.0.1:8000/api/getRoles",
+
+                    {
+                        headers: {
+                            Accept: "application/json",
+                            "Content-Type": "application/json",
+                            "X-Requested-With": "XMLHttpRequest",
+                            Authorization:
+                                "Bearer " + localStorage.getItem("token"),
+                        },
+                    }
+                )
+                .then((response) => {
+                    console.log(response.data);
+                    
+                    departments.value = Object.values(
+                        response.data.roles
+                            .map((item) => item.name)
+                            .filter((item) => item !== "admin")
+                    );
+                    console.log(departments.value);
+                })
+                .catch((error) => {
+                    console.log(error);
+                });
+        }
         function getUsers() {
             axios
                 .get("http://127.0.0.1:8000/api/getUsers", {
@@ -300,6 +331,7 @@ export default {
         }
         const items = ref([]);
         const item = ref({});
+        const departments = ref([]);
         function showDeleteModal(selectedItem) {
             item.value = selectedItem;
             deleteDialog.value = true;
@@ -321,6 +353,7 @@ export default {
         return {
             headers,
             items,
+            departments,
             dialog,
             addNewUser,
             getUsers,
@@ -337,6 +370,7 @@ export default {
             deleteDialog,
             editDialog,
             item,
+            getDepartments,
         };
     },
 };
