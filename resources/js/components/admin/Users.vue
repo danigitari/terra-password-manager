@@ -30,7 +30,7 @@
                                         label="Department"
                                         required
                                         v-model="department"
-                                        multiple
+                                    
                                     ></v-select>
                                 </v-col>
                                 <v-col cols="12" sm="6" md="6">
@@ -266,7 +266,7 @@ export default {
                         headers: {
                             Accept: "application/json",
                             "Content-Type": "application/json",
-                            "X-Requested-With": "XMLHttpRequest",
+                            "X-Requested-With": "XMLHttpRequest",    
                             Authorization:
                                 "Bearer " + localStorage.getItem("token"),
                         },

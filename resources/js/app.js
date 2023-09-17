@@ -15,7 +15,7 @@ import 'vue3-easy-data-table/dist/style.css';
 
 
 const vuetify = createVuetify({
-    components,
+    components, 
     directives,
 
     icons: {

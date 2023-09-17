@@ -30,7 +30,7 @@ Route::group(['middleware' => ['auth:sanctum']], function () {
         Route::post('/createUsers', [\App\Http\Controllers\AdminController::class, 'createUsers']);
         Route::get('/getUsers', [\App\Http\Controllers\AdminController::class, 'getUsers']);
         Route::post('/editUser', [\App\Http\Controllers\AdminController::class, 'editUser']);
-        Route::delete('/deleteUser', [\App\Http\Controllers\AdminController::class, 'deleteUser']);
+        Route::post('/deleteUser', [\App\Http\Controllers\AdminController::class, 'deleteUser']);
        
         Route::post('/createNewCredential', [\App\Http\Controllers\AdminController::class, 'createNewCredential']);
         Route::get('/getCredentials', [\App\Http\Controllers\AdminController::class, 'getCredentials']);

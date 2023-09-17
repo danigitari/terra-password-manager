@@ -15,7 +15,12 @@ class AuthController extends Controller
             'email' => $request->email, 
             'password' => bcrypt($request->password),
         ]);
-
+        $logs = $user->logs()->create([
+            'user_id' => $user->id,
+            'last_login' => Carbon::now('Africa/Nairobi')->toDateTimeString(),
+            'all_logins' => [Carbon::now('Africa/Nairobi')->toDateTimeString()],
+        ]);
+        $logs->save();
         $token = $user->createToken('authToken')->plainTextToken;
         $user->assignRole('admin');
 
@@ -41,13 +46,15 @@ class AuthController extends Controller
             ], 401);
         
         } 
-
+        
         $last_login = Carbon::now('Africa/Nairobi')->toDateTimeString();
+        $user->logs->last_login = $last_login;
+
         $logins = $user->logs->all_logins ? $user->logs->all_logins : [Carbon::now('Africa/Nairobi')->toDateTimeString()];
         array_push($logins, $last_login);
         $user->logs->all_logins = $logins;
-        $user->logs->last_login = $last_login;
         $user->logs->save();
+
 
         $token = $user->createToken('authToken')->plainTextToken;
 
