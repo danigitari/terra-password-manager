@@ -90,7 +90,7 @@ export default {
         function addNewAdmin() {
             axios
                 .post(
-                    "http://127.0.0.1:8000/api/addNewAdmin",
+                    "/api/addNewAdmin",
                     {
                         name: name.value,
                         email: email.value,
@@ -116,7 +116,7 @@ export default {
         }
         function getUsers() {
             axios
-                .get("http://127.0.0.1:8000/api/getUsers", {
+                .get("/api/getUsers", {
                     headers: {
                         Accept: "application/json",
                         "Content-Type": "application/json",

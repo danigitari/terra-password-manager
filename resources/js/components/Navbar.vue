@@ -50,7 +50,7 @@ export default {
         const router = useRouter();
         const logout = () => {
             axios
-                .post("http://127.0.0.1:8000/api/logout", {
+                .post("/api/logout", {
                     headers: {
                         Accept: "application/json",
                         "Content-Type": "application/json",

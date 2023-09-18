@@ -228,7 +228,7 @@ export default {
         function addNewCredential() {
             axios
                 .post(
-                    "http://127.0.0.1:8000/api/createNewCredential",
+                    "/api/createNewCredential",
                     {
                         organization: organization.value,
                         password: password.value,
@@ -260,7 +260,7 @@ export default {
 
             axios
                 .post(
-                    "http://127.0.0.1:8000/api/editCredential",
+                    "/api/editCredential",
                     {
                         organization: organization.value,
                         password: password.value,
@@ -292,7 +292,7 @@ export default {
         function getCreds() {
             axios
                 .get(
-                    "http://127.0.0.1:8000/api/getCredentials",
+                    "/api/getCredentials",
 
                     {
                         headers: {

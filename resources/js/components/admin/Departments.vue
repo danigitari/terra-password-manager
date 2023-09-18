@@ -101,7 +101,7 @@ export default {
         });
         function getUsers() {
             axios
-                .get("http://127.0.0.1:8000/api/getUsers", {
+                .get("/api/getUsers", {
                     headers: {
                         Accept: "application/json",
                         "Content-Type": "application/json",
@@ -186,7 +186,7 @@ export default {
         function addNewDepartment() {
             axios
                 .post(
-                    "http://127.0.0.1:8000/api/createNewRole",
+                    "/api/createNewRole",
                     {
                         department: department.value,
                     },
@@ -212,7 +212,7 @@ export default {
         function editDepartment() {
             axios
                 .post(
-                    "http://127.0.0.1:8000/api/editRole",
+                    "/api/editRole",
                     {
                         department: department.value,
                         id: item.value.id,
@@ -239,7 +239,7 @@ export default {
         function getDepartments() {
             axios
                 .get(
-                    "http://127.0.0.1:8000/api/getRoles",
+                    "/api/getRoles",
 
                     {
                         headers: {

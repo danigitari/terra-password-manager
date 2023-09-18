@@ -196,7 +196,7 @@ export default {
         function addNewUser() {
             axios
                 .post(
-                    "http://127.0.0.1:8000/api/createUsers",
+                    "/api/createUsers",
                     {
                         name: name.value,
                         department: department.value,
@@ -227,7 +227,7 @@ export default {
 
             axios
                 .post(
-                    "http://127.0.0.1:8000/api/editUser",
+                    "/api/editUser",
                     {
                         name: name.value,
                         department: department.value,
@@ -258,7 +258,7 @@ export default {
         function deleteUser(a) {
             axios
                 .post(
-                    "http://127.0.0.1:8000/api/deleteUser",
+                    "/api/deleteUser",
                     {
                         id: item.value.id,
                     },
@@ -285,7 +285,7 @@ export default {
         function getDepartments() {
             axios
                 .get(
-                    "http://127.0.0.1:8000/api/getRoles",
+                    "/api/getRoles",
 
                     {
                         headers: {
@@ -313,7 +313,7 @@ export default {
         }
         function getUsers() {
             axios
-                .get("http://127.0.0.1:8000/api/getUsers", {
+                .get("/api/getUsers", {
                     headers: {
                         Accept: "application/json",
                         "Content-Type": "application/json",

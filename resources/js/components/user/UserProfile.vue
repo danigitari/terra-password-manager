@@ -72,7 +72,7 @@ export default {
         const user = ref({});
         function getCurrentUser() {
             axios
-                .get("http://127.0.0.1:8000/api/getCurrentUser", {
+                .get("/api/getCurrentUser", {
                     headers: {
                         Accept: "application/json",
                         "Content-Type": "application/json",
@@ -92,7 +92,7 @@ export default {
         function editProfile(){
             axios
                 .post(
-                    "http://127.0.0.1:8000/api/editProfile",
+                    "/api/editProfile",
                     {
                         email: user.email,
                         password: user.password,
