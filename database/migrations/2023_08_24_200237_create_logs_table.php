@@ -16,7 +16,7 @@ return new class extends Migration
             $table->timestamps();
             $table->foreignId('user_id');
             $table->string('last_login');
-            $table->json('all_logins')->default(0);
+            $table->json('all_logins');
             $table->string('last_credential_copied')->nullable();
             $table->json('all_credentials_copied')->nullable();
             $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
