@@ -151,7 +151,7 @@
                 <div class="operation-wrapper">
                     <button
                         class="rounded-full bg-red-600 py-1 px-4 text-white text-sm shadow-md"
-                        @click="showDeleteModal(selectedItem)"
+                        @click="showDeleteModal(selectedItem)"  
                     >
                         delete
                     </button>
